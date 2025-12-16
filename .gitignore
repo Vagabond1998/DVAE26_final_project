@@ -1,3 +1,36 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Conda / envs
+.env
+.conda/
+*.conda
+env/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Model artifacts (large, reproducible)
+artifacts/
+models/
+*.pt
+*.pth
+
+# Experiment outputs
+runs/
+outputs/
+checkpoints/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
