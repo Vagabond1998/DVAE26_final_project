@@ -1,5 +1,6 @@
 # Data
 data/
+artifacts/
 
 # Python cache
 __pycache__/
