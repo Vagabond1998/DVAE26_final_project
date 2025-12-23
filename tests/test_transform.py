@@ -2,8 +2,7 @@ import torch
 from PIL import Image
 import numpy as np
 
-from src.data import get_transforms
-
+from steps.transform import get_transforms
 
 def test_train_transform_outputs_tensor_with_correct_shape():
     transform = get_transforms(train=True)
