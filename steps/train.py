@@ -14,21 +14,29 @@ from src.model import MNISTCNN
 
 _logger = logging.getLogger(__name__)
 
-
-def _evaluate_accuracy(model: torch.nn.Module, loader, device: torch.device) -> float:
+def _evaluate_loss_and_accuracy(model, loader, device, criterion):
     model.eval()
+    running_loss = 0.0
     correct = 0
     total = 0
+
     with torch.no_grad():
         for images, labels in loader:
             images = images.to(device)
             labels = labels.to(device)
+
             logits = model(images)
+            loss = criterion(logits, labels)
+
+            bs = images.size(0)
+            running_loss += loss.item() * bs
             preds = logits.argmax(dim=1)
             correct += (preds == labels).sum().item()
-            total += labels.size(0)
-    return correct / total if total > 0 else 0.0
+            total += bs
 
+    avg_loss = running_loss / total if total > 0 else 0.0
+    acc = correct / total if total > 0 else 0.0
+    return avg_loss, acc
 
 def train(
     data_dir: str = "./data",
@@ -68,11 +76,14 @@ def train(
     artifacts_path.mkdir(parents=True, exist_ok=True)
 
     best_acc = -1.0
+    best_epoch = 0
+    best_test_loss = None
     best_path = artifacts_path / "mnist_cnn.pt"
 
-    history: Dict[str, List[float]] = {
+    history = {
         "train_loss": [],
         "train_acc": [],
+        "test_loss": [],
         "test_acc": [],
     }
 
@@ -105,39 +116,45 @@ def train(
 
         train_loss = running_loss / total
         train_acc = correct / total
-        test_acc = _evaluate_accuracy(model, test_loader, device)
+        test_loss, test_acc = _evaluate_loss_and_accuracy(model, test_loader, device, criterion)
 
         history["train_loss"].append(train_loss)
         history["train_acc"].append(train_acc)
+        history["test_loss"].append(test_loss)
         history["test_acc"].append(test_acc)
 
         _logger.info(
-            "Epoch %d/%d | train_loss=%.4f train_acc=%.4f test_acc=%.4f",
-            epoch, epochs, train_loss, train_acc, test_acc
+            "Epoch %d/%d | train_loss=%.4f train_acc=%.4f test_loss=%.4f test_acc=%.4f",
+            epoch, epochs, train_loss, train_acc, test_loss, test_acc
         )
 
         # Save best checkpoint
         if (not save_best_only) or (test_acc > best_acc):
+            best_epoch = epoch
+            best_test_loss = test_loss
             best_acc = test_acc
             torch.save(model.state_dict(), best_path)
             _logger.info("Saved checkpoint: %s (best_acc=%.4f)", best_path, best_acc)
 
     # Save training history
     hist_path = artifacts_path / "train_history.json"
+    out = {
+        "best_epoch": best_epoch,
+        "best_test_acc": best_acc,
+        "best_test_loss": best_test_loss,
+        "config": {
+            "epochs": epochs,
+            "batch_size": batch_size,
+            "lr": lr,
+            "num_workers": num_workers,
+            "seed": seed,
+        },
+        "history": history,
+    }
+
     with open(hist_path, "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "epochs": epochs,
-                "batch_size": batch_size,
-                "lr": lr,
-                "num_workers": num_workers,
-                "seed": seed,
-                "best_test_acc": best_acc,
-                "history": history,
-            },
-            f,
-            indent=2,
-        )
+        json.dump(out, f, indent=2)
+
     _logger.info("Saved training history: %s", hist_path)
 
     return best_path
