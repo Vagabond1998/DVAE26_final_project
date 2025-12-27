@@ -1,6 +1,7 @@
 # Data
 data/
 artifacts/
+hf_model/
 
 # Python cache
 __pycache__/
