@@ -14,6 +14,41 @@ From an engineering perspective, the project is structured as a complete machine
 
 By using MNIST as a benchmark dataset, this project provides a controlled environment in which design decisions, training behavior, and evaluation results can be clearly analyzed and explained. The focus is therefore not only on model performance, but also on demonstrating a structured and reproducible approach to machine learning system development, in line with the objectives of the course.
 
+## 2. Dataset Description and Data Quality Analysis
+### 2.1 Dataset Overview
+
+The dataset used in this project is the MNIST handwritten digit dataset, a widely adopted benchmark for image classification tasks. MNIST consists of grayscale images of handwritten digits ranging from 0 to 9. Each image has a fixed resolution of 28 × 28 pixels, resulting in a total of 784 pixel values per image. The dataset is divided into a training set containing 60,000 images and a test set containing 10,000 images.
+
+Each image is associated with a single class label corresponding to the digit it represents. The dataset is approximately class-balanced, meaning that each digit class is represented by a similar number of samples. This balanced distribution simplifies evaluation and allows the use of standard classification metrics without the need for class weighting or resampling strategies.
+
+MNIST images are stored as grayscale intensity values, where each pixel represents the brightness at a particular spatial location. This structure makes MNIST particularly suitable for convolutional neural networks, which are designed to exploit local spatial correlations in image data.
+
+### 2.2 Data Quality Characteristics
+
+MNIST is a curated and well-maintained benchmark dataset, and as such, it exhibits high data quality compared to many real-world datasets. No missing values, corrupted images, or inconsistent labels were observed during dataset inspection. All images share a consistent resolution and format, and labels are provided for every sample.
+
+Unlike tabular datasets, image datasets do not typically require operations such as imputation or removal of invalid rows. Instead, data quality considerations for image data focus on factors such as visual clarity, label correctness, class balance, and robustness to natural variations in appearance. In the case of MNIST, the dataset’s controlled acquisition process and extensive prior use in the literature provide confidence in its label accuracy and overall integrity.
+
+To verify dataset integrity within the project pipeline, the dataset was loaded programmatically and basic sanity checks were performed. These checks included verifying the total number of images in the training and test sets, confirming the expected image dimensions, and ensuring that label values fell within the valid range of 0 to 9.
+
+### 2.3 Class Distribution and Balance
+
+An important aspect of data quality for classification tasks is class distribution. Severe class imbalance can bias model training and distort evaluation metrics. The MNIST dataset exhibits an approximately uniform distribution across all ten digit classes in both the training and test sets. This balance reduces the risk of biased learning and enables the use of accuracy, precision, and recall as reliable evaluation metrics.
+
+Because the dataset is balanced, no additional techniques such as oversampling, undersampling, or class-weighted loss functions were required. This allows model performance to be interpreted directly without adjusting for skewed class frequencies.
+
+### 2.4 Normalization and Numerical Stability
+
+Although MNIST does not require traditional data cleaning, numerical preprocessing is still necessary to ensure stable and efficient model training. Raw pixel values in MNIST are represented as integer intensities, which are not ideal for gradient-based optimization. To address this, images were normalized using the mean and standard deviation computed from the training set.
+
+Normalization ensures that input values are centered and scaled consistently, which improves numerical stability during training and accelerates convergence. Importantly, normalization parameters were computed exclusively on the training data and then applied to both training and test sets, preventing information leakage from the test data into the training process.
+
+### 2.5 Summary of Data Quality Considerations
+
+In summary, the MNIST dataset provides a high-quality and well-structured foundation for image recognition experiments. While extensive data cleaning procedures were not required, careful attention was paid to dataset integrity, class balance, and numerical preprocessing. These steps ensure that observed model performance reflects the learning capability of the model rather than artifacts introduced by data quality issues.
+
+The controlled nature of MNIST allows the project to focus on the design, training, and evaluation of the convolutional neural network, while still demonstrating appropriate data quality analysis practices relevant to image-based machine learning systems.
+
 ## Project Overview
 
 ## Dataset
