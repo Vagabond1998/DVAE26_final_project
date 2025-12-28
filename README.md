@@ -270,7 +270,52 @@ The results also validate the preprocessing and architectural decisions made ear
 
 In summary, the trained model achieved strong and consistent performance across all evaluation metrics. Analysis of accuracy, precision, recall, confusion matrices, and learning curves provides confidence in the model’s reliability and generalization capability. These results confirm the effectiveness of the end-to-end pipeline implemented in this project and justify the selection of the final deployed model.
 
-## Software Engineering Practices
+## 8. Software Engineering Best Practices
+### 8.1 Modular Project Structure
+
+The project is organized using a modular repository structure that separates concerns and improves maintainability. Core functionality is divided into logically distinct modules responsible for data handling, preprocessing, model definition, training, evaluation, and deployment. This separation allows individual components to be developed, tested, and modified independently without affecting the entire system.
+
+For example, data ingestion and preprocessing are implemented separately from model training and evaluation logic. This design reduces coupling between components and supports reuse, experimentation, and debugging. Such modularization aligns with established software engineering principles and is particularly important in machine learning projects, where pipelines often evolve iteratively.
+
+### 8.2 Reproducibility and Configuration Management
+
+Reproducibility is a key requirement for reliable machine learning systems. To support reproducible experiments, the project explicitly controls sources of randomness by setting fixed random seeds for data loading and model training. This ensures that results can be reproduced across runs under the same configuration.
+
+Training configurations, including hyperparameters such as learning rate, batch size, number of epochs, and optimizer settings, are recorded and stored alongside training artifacts. This enables traceability between reported results and the exact configuration used to produce them, which is essential for both academic evaluation and future experimentation.
+
+### 8.3 Testing and Validation
+
+Automated testing is used to validate key components of the pipeline. Unit tests are implemented for critical functions such as data ingestion, preprocessing, model construction, and evaluation metrics. These tests verify expected behavior and help detect regressions when code is modified.
+
+By integrating testing into the development process, the project reduces the risk of silent errors and increases confidence in the correctness of individual components. This approach reflects standard software engineering practice and is particularly valuable in machine learning projects, where errors in data handling or evaluation logic can significantly affect results.
+
+### 8.4 Logging and Monitoring
+
+Logging is used to track training progress and record important events during execution. Training loss, accuracy, and evaluation metrics are logged at regular intervals, providing transparency into the learning process and enabling post hoc analysis of model behavior.
+
+The use of structured logs and saved training histories allows performance trends to be visualized and interpreted after training has completed. This facilitates informed decision-making during model development and supports clear reporting of results.
+
+### 8.5 Path Handling and Environment Independence
+
+To ensure portability across different execution environments, file paths are handled explicitly and resolved relative to the project root. This avoids reliance on implicit working directory assumptions, which can vary between scripts, notebooks, and execution environments.
+
+In the notebook environment, the working directory is explicitly set to the project root to ensure consistent behavior when accessing data, artifacts, and configuration files. This design choice improves robustness and prevents path-related errors when the project is executed on different machines or by external users.
+
+### 8.6 Version Control and Repository Management
+
+All code, configuration files, and documentation are managed using a version control system. Version control enables incremental development, rollback of changes, and clear tracking of project evolution. It also supports collaboration and external review.
+
+Large binary artifacts such as datasets and trained model weights are excluded from the version-controlled repository to avoid unnecessary repository bloat. Instead, trained models are stored as artifacts and deployed separately via the Hugging Face platform.
+
+### 8.7 Deployment-Oriented Design
+
+Deployment considerations are integrated into the project design from an early stage. The trained model, along with the corresponding inference code and documentation, is packaged in a format suitable for deployment and uploaded to the Hugging Face Hub. This ensures that the model can be easily reused and evaluated by others without requiring access to the full training environment.
+
+By designing the pipeline with deployment in mind, the project demonstrates an end-to-end engineering approach rather than focusing solely on model training.
+
+### 8.8 Summary of Software Engineering Practices
+
+In summary, the project applies software engineering best practices throughout the machine learning lifecycle. Modular code organization, reproducibility measures, automated testing, logging, explicit path handling, version control, and deployment-oriented design collectively contribute to a robust and maintainable system. These practices ensure that the developed solution is not only accurate but also reliable, transparent, and suitable for real-world use.
 
 ## Deployment
 
