@@ -393,6 +393,14 @@ Future extensions could include packaging a dedicated inference script, writing 
 
 In summary, the limitations of this project primarily stem from the simplicity of the dataset, the compact model architecture, and the scope of hyperparameter exploration and deployment. These constraints are appropriate given the project’s educational focus but also highlight clear opportunities for extension. Future work could build on the current pipeline by incorporating more complex data, advanced architectures, systematic tuning, and richer deployment mechanisms.
 
+## 11. Conclusion
 
+This project presented the design, implementation, and evaluation of an end-to-end image recognition pipeline using a convolutional neural network trained on the MNIST handwritten digit dataset. The work focused not only on achieving strong classification performance, but also on applying software engineering best practices and ensuring reproducibility, transparency, and deployability throughout the machine learning lifecycle.
 
-## References
+Starting from data ingestion and preprocessing, the project demonstrated appropriate handling of image data through normalization and data augmentation. Exploratory Data Analysis provided insight into the structure and variability of the dataset, informing subsequent modeling decisions. A custom convolutional neural network was designed and trained using established optimization techniques, resulting in high classification accuracy and stable generalization performance.
+
+Model evaluation was conducted using multiple metrics, including accuracy, precision, recall, confusion matrices, and loss curves. These evaluation methods provided a comprehensive understanding of model behavior and confirmed that the trained network performs reliably across all digit classes. The absence of severe overfitting further validated the chosen architecture and training strategy.
+
+In addition to model development, the project emphasized software engineering principles such as modular code organization, automated testing, reproducibility, and version control. Deployment of the trained model to the Hugging Face Hub demonstrated the ability to package and distribute machine learning artifacts using modern tooling, completing the end-to-end pipeline from data to deployment.
+
+While the project is constrained by the simplicity of the MNIST dataset and a compact model architecture, it provides a solid foundation for future extensions involving more complex data, advanced architectures, systematic hyperparameter optimization, and richer deployment scenarios. Overall, the project successfully meets the objectives of developing, evaluating, and deploying an image recognition model while adhering to sound engineering practices.
