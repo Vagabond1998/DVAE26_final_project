@@ -81,6 +81,23 @@ In summary, the MNIST dataset provides a high-quality and well-structured founda
 The controlled nature of MNIST allows the project to focus on the design, training, and evaluation of the convolutional neural network, while still demonstrating appropriate data quality analysis practices relevant to image-based machine learning systems.
 
 ## 5. Repository Structure
+The project repository is organized to promote modularity, readability, and reproducibility. Each component of the machine learning pipeline is isolated into a clearly defined module.
+
+At a high level, the repository contains:
+
+- src/ – Core source code implementing data handling, model architecture, training logic, evaluation metrics, and plotting utilities.
+
+- steps/ – Script-based pipeline components for ingestion, training, evaluation, and deployment-related tasks.
+
+- tests/ – Unit tests validating the behavior of key modules such as data loading, preprocessing, model creation, and evaluation.
+
+- notebooks/ – Jupyter notebooks used for experimentation, visualization, reporting, and deployment execution.
+
+- artifacts/ – Generated outputs such as trained model weights and training histories (excluded from version control where appropriate).
+
+- Configuration files – Environment and dependency specifications to support reproducibility.
+
+This structure follows established software engineering practices and enables individual components to be tested, modified, and reused independently. Separating notebooks from source code ensures that experimental analysis does not interfere with production logic, while still allowing results to be validated interactively.
 
 ## 6. Exploratory Data Analysis (EDA)
 ### 6.1 Purpose of Exploratory Data Analysis for Image Data
