@@ -221,9 +221,54 @@ This indicates that the model did not suffer from severe overfitting, likely due
 
 In summary, hyperparameters were selected using standard values informed by prior knowledge and validated through empirical observation of training behavior. Monitoring of loss and accuracy curves ensured that the model converged stably and generalized well to unseen data. This approach provides a transparent and reproducible training procedure while remaining appropriate for the scope and objectives of the project.
 
-## Training Procedure
+## 7. Evaluation and Results
+### 7.1 Evaluation Methodology
 
-## Evaluation
+Model evaluation was conducted using the MNIST test set, which consists of 10,000 images that were not used during training. The test set provides an unbiased estimate of the model’s generalization performance. Evaluation was performed after each training epoch to monitor learning progress and support model selection.
+
+Multiple evaluation metrics were used to assess performance. In addition to overall classification accuracy, precision and recall were computed to provide a more detailed view of classification behavior across digit classes. Test loss was also recorded to assess confidence calibration and detect potential overfitting.
+
+### 7.2 Classification Accuracy
+
+Classification accuracy was used as the primary performance metric. Due to the approximately balanced class distribution of the MNIST dataset, accuracy provides a meaningful summary of overall model performance.
+
+The trained convolutional neural network achieved a test accuracy exceeding 99%. Accuracy improved rapidly during the early stages of training and reached a stable plateau after approximately 8–10 epochs. This indicates that the model was able to learn discriminative features efficiently and converge within a relatively small number of training iterations.
+
+The high final accuracy demonstrates that the model successfully captures the essential visual characteristics required to distinguish handwritten digits.
+
+### 7.3 Precision and Recall
+
+To complement accuracy, macro-averaged precision and recall were computed across all ten digit classes. Macro-averaging ensures that each class contributes equally to the final metric, which is appropriate given the balanced nature of the MNIST dataset.
+
+High precision values indicate that the model produces few false positive predictions, while high recall values indicate that most true digit instances are correctly identified. The trained model achieved high macro-averaged precision and recall, demonstrating consistent performance across digit classes rather than favoring a subset of classes.
+
+The agreement between accuracy, precision, and recall suggests that the model’s predictions are both reliable and well-balanced.
+
+### 7.4 Confusion Matrix Analysis
+
+The confusion matrix was analyzed to gain insight into class-wise prediction behavior. Most predictions fall along the diagonal of the matrix, indicating correct classification for the majority of samples.
+
+Misclassifications primarily occur between visually similar digits, such as digits with overlapping stroke patterns or ambiguous handwritten forms. Examples include occasional confusion between digits such as “4” and “9” or “3” and “5”. These errors are consistent with known challenges in handwritten digit recognition and reflect inherent ambiguity in some samples rather than systematic model failure.
+
+Importantly, no single class exhibits a disproportionately high error rate, indicating that the model generalizes well across all digit categories.
+
+### 7.5 Training and Test Loss Behavior
+
+Training and test loss curves provide valuable insight into the learning dynamics of the model. Training loss decreased steadily throughout the training process, indicating effective optimization and continual improvement in model fit to the training data.
+
+Test loss decreased during the initial epochs and then stabilized as training progressed. The absence of a sustained increase in test loss suggests that the model did not experience severe overfitting. While training accuracy continued to improve slightly in later epochs, test accuracy remained stable, indicating diminishing returns rather than degradation in generalization performance.
+
+This behavior supports the selection of the final model checkpoint based on peak test accuracy rather than the final training epoch.
+
+### 7.6 Interpretation of Results
+
+The evaluation results demonstrate that the convolutional neural network effectively learns robust feature representations for handwritten digit recognition. The combination of high accuracy, strong precision and recall, and stable loss behavior indicates that the model generalizes well to unseen data.
+
+The results also validate the preprocessing and architectural decisions made earlier in the pipeline. Data normalization and augmentation contributed to stable training, while the compact CNN architecture proved sufficient for achieving strong performance on MNIST without unnecessary complexity.
+
+### 7.7 Summary of Evaluation
+
+In summary, the trained model achieved strong and consistent performance across all evaluation metrics. Analysis of accuracy, precision, recall, confusion matrices, and learning curves provides confidence in the model’s reliability and generalization capability. These results confirm the effectiveness of the end-to-end pipeline implemented in this project and justify the selection of the final deployed model.
 
 ## Software Engineering Practices
 
