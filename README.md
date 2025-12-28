@@ -48,10 +48,50 @@ Normalization ensures that input values are centered and scaled consistently, wh
 In summary, the MNIST dataset provides a high-quality and well-structured foundation for image recognition experiments. While extensive data cleaning procedures were not required, careful attention was paid to dataset integrity, class balance, and numerical preprocessing. These steps ensure that observed model performance reflects the learning capability of the model rather than artifacts introduced by data quality issues.
 
 The controlled nature of MNIST allows the project to focus on the design, training, and evaluation of the convolutional neural network, while still demonstrating appropriate data quality analysis practices relevant to image-based machine learning systems.
-
 ## Project Overview
 
-## Dataset
+## 3. Exploratory Data Analysis (EDA)
+### 3.1 Purpose of Exploratory Data Analysis for Image Data
+
+Exploratory Data Analysis (EDA) is a critical step in any machine learning pipeline, as it provides insights into the structure, variability, and potential challenges of the dataset before model training. For image-based datasets, EDA differs from traditional tabular data analysis. Rather than focusing on statistical summaries of individual features, image EDA emphasizes visual inspection, dimensionality understanding, and assessment of intra-class and inter-class variability.
+
+The primary objectives of EDA in this project are to verify that the dataset has been loaded correctly, to understand the visual characteristics of handwritten digits, and to identify sources of variation that the model must learn to handle.
+
+### 3.2 Dataset Shape and Dimensionality
+
+Each MNIST image consists of 28 × 28 grayscale pixels, resulting in a two-dimensional array per sample. When loaded into the training pipeline, images are converted into tensors with shape (1, 28, 28), where the leading dimension corresponds to the single grayscale channel.
+
+The full training dataset therefore has the shape (60000, 1, 28, 28), while the test dataset has the shape (10000, 1, 28, 28). This confirms that the dataset has been loaded correctly and matches the expected structure defined by the MNIST specification.
+
+Understanding the dimensionality of the input data is essential for designing the convolutional neural network architecture, as convolutional layers operate directly on the spatial structure of the input tensors.
+
+### 3.3 Visual Inspection of Samples
+
+A key component of EDA for image data is visual inspection of representative samples from each class. Random samples from the dataset reveal significant variation in handwriting style, stroke thickness, digit size, and orientation. For example, the digit “1” may appear as a simple vertical line in some samples, while in others it includes a serif or diagonal stroke. Similarly, digits such as “4” and “9” can exhibit structural similarities that make them more challenging to distinguish.
+
+Visual inspection confirms that the dataset contains a wide range of realistic handwriting styles. This variability motivates the use of data augmentation techniques during training to improve the model’s robustness to small transformations and stylistic differences.
+
+### 3.4 Intra-Class and Inter-Class Variability
+
+EDA also highlights two important characteristics of the dataset:
+
+- Intra-class variability: Samples belonging to the same digit class can differ substantially in appearance due to differences in handwriting style, stroke pressure, and orientation.
+
+- Inter-class similarity: Certain digit pairs, such as “3” and “5” or “4” and “9”, may share visual similarities that increase the risk of misclassification.
+
+These observations justify the use of convolutional neural networks, which are well-suited for learning hierarchical features that can capture both local patterns (such as edges and curves) and global digit structure.
+
+### 3.5 Feature Engineering Considerations
+
+Unlike classical machine learning approaches, convolutional neural networks do not require explicit manual feature engineering. Instead, the network learns relevant features directly from the pixel data during training. As a result, no handcrafted features such as edge detectors or shape descriptors were introduced.
+
+However, preprocessing steps such as normalization and data augmentation can be viewed as forms of feature preparation that improve learning stability and generalization. These steps are discussed in detail in the following section.
+
+### 3.6 Summary of EDA Findings
+
+Exploratory Data Analysis confirmed that the MNIST dataset is correctly structured, visually diverse, and suitable for training a convolutional neural network. The observed variability in handwriting styles underscores the importance of robust model design and appropriate data augmentation. Additionally, the absence of severe class imbalance or corrupted samples allows the focus to remain on model architecture and training strategy rather than extensive data cleaning.
+
+The insights gained from EDA directly inform the preprocessing and modeling decisions described in subsequent sections.
 
 ## Data Quality Analysis
 
