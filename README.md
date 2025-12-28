@@ -351,8 +351,48 @@ This design emphasizes transparency and correctness over convenience and reflect
 ### 9.6 Summary of Deployment
 
 In summary, the trained convolutional neural network was successfully deployed to the Hugging Face Hub as a reusable model artifact. The deployment demonstrates the ability to package and distribute trained models using a modern platform while maintaining security and reproducibility. While the deployment is minimal and does not include a dedicated inference interface, it fulfills the project requirement of showcasing the trained model on the Hugging Face platform.
-## How to run the project locally
 
-## Repository Structure
+## 10. Limitations and Future Work
+### 10.1 Dataset Limitations
+
+A primary limitation of this project is the use of the MNIST dataset, which is a highly curated and simplified benchmark for image recognition. MNIST images are low-resolution, grayscale, and centered, with minimal background noise. While this makes the dataset well-suited for controlled experimentation and educational purposes, it does not fully reflect the complexity of real-world image recognition problems.
+
+As a result, the high performance achieved in this project should be interpreted in the context of the dataset’s simplicity. Models trained on MNIST may not generalize directly to more complex handwritten digit datasets or real-world document images without additional adaptation.
+
+### 10.2 Limited Data Quality Challenges
+
+Because MNIST is a clean and well-structured dataset, the project involved limited data cleaning or outlier handling compared to real-world datasets. No missing values, corrupted samples, or mislabeled data were observed. While this allows the focus to remain on the machine learning pipeline itself, it reduces exposure to more challenging data quality issues such as noise, annotation errors, or domain shifts.
+
+Future work could involve applying the same pipeline to less curated image datasets, where data quality analysis and cleaning would play a more substantial role.
+
+### 10.3 Model Architecture Simplicity
+
+The convolutional neural network used in this project was intentionally kept compact and simple. While this architecture is sufficient to achieve strong performance on MNIST, it may not scale effectively to more complex tasks involving higher-resolution images, multiple color channels, or greater intra-class variability.
+
+More expressive architectures, such as deeper convolutional networks, residual connections, or models incorporating regularization techniques like dropout and batch normalization, could be explored in future work to improve robustness and scalability.
+
+### 10.4 Hyperparameter Exploration
+
+Hyperparameter selection in this project was based on informed manual choices and empirical observation of training behavior, rather than systematic or automated optimization. While this approach is appropriate for the scope of the project, it limits insight into how sensitive the model’s performance is to different hyperparameter configurations.
+
+Future work could include structured hyperparameter exploration, such as evaluating multiple learning rates, batch sizes, or training durations, to better understand the trade-offs between convergence speed, stability, and final performance.
+
+### 10.5 Evaluation Scope
+
+Evaluation was conducted using a single predefined train-test split provided by the MNIST dataset. Although this is standard practice for benchmark datasets, it limits the assessment of robustness across different data partitions or sampling variations.
+
+Additional evaluation strategies, such as cross-validation or testing on alternative handwritten digit datasets, could provide a more comprehensive understanding of model generalization.
+
+### 10.6 Deployment Scope
+
+The deployment performed in this project focuses on making the trained model weights available via the Hugging Face Hub. While this satisfies the requirement of showcasing the model on a modern deployment platform, it does not provide a standalone inference interface or interactive demonstration.
+
+Future extensions could include packaging a dedicated inference script, writing a detailed model card, or creating an interactive application that allows users to upload images and receive predictions. Such additions would further improve accessibility and usability.
+
+### 10.7 Summary of Limitations and Future Directions
+
+In summary, the limitations of this project primarily stem from the simplicity of the dataset, the compact model architecture, and the scope of hyperparameter exploration and deployment. These constraints are appropriate given the project’s educational focus but also highlight clear opportunities for extension. Future work could build on the current pipeline by incorporating more complex data, advanced architectures, systematic tuning, and richer deployment mechanisms.
+
+
 
 ## References
