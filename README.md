@@ -128,8 +128,51 @@ By encapsulating transformations within dedicated functions, the preprocessing p
 
 In summary, data transformation and augmentation play a central role in preparing the MNIST dataset for convolutional neural network training. Through tensor conversion, normalization, and carefully chosen augmentation techniques, the input data is made numerically stable and more representative of real-world handwriting variability. These preprocessing steps directly support the model’s ability to learn robust and generalizable representations from image data.
 
-## Data Quality Analysis
+## 5. Model Architecture
+### 5.1 Motivation for Using a Convolutional Neural Network
 
+Convolutional Neural Networks (CNNs) are specifically designed to process grid-structured data such as images. Unlike fully connected networks, CNNs exploit the spatial locality and hierarchical structure of image data through the use of convolutional filters and shared weights. This makes them particularly effective for image recognition tasks, where local patterns such as edges, corners, and curves combine to form higher-level structures.
+
+Given the two-dimensional nature of MNIST images and the need to capture spatial relationships between pixels, a CNN is a natural and well-established choice for this task.
+
+### 5.2 Overall Network Structure
+
+The model used in this project is a custom-designed CNN implemented in PyTorch. It follows a relatively simple architecture consisting of multiple convolutional layers followed by pooling operations and fully connected layers. This design reflects a balance between expressive power and computational efficiency, which is appropriate for the MNIST dataset.
+
+At a high level, the network is composed of the following components:
+
+1. Convolutional layers to extract local spatial features from input images.
+2. Non-linear activation functions to introduce non-linearity and enable the learning of complex patterns.
+3. Pooling layers to reduce spatial dimensionality and provide translation invariance.
+4. Fully connected layers to map learned feature representations to class scores.
+
+### 5.3 Convolutional Feature Extraction
+
+The initial layers of the network consist of convolutional layers that operate directly on the input image tensors. These layers apply learnable filters across the spatial dimensions of the image to detect local patterns such as edges and simple shapes. As depth increases, subsequent convolutional layers learn progressively more abstract features, combining lower-level patterns into higher-level representations of digit structure.
+
+Each convolutional layer is followed by a non-linear activation function, allowing the network to model complex, non-linear relationships in the data. This hierarchical feature extraction process is central to the effectiveness of CNNs in image recognition tasks.
+
+### 5.4 Pooling and Dimensionality Reduction
+
+Pooling layers are interleaved with convolutional layers to reduce the spatial resolution of feature maps. By summarizing local neighborhoods, pooling helps reduce computational complexity and provides a degree of invariance to small translations in the input image.
+
+This is particularly useful for handwritten digit recognition, where the precise position of a stroke may vary slightly between samples without changing the digit’s identity. Pooling allows the network to focus on the presence of features rather than their exact location.
+
+### 5.5 Fully Connected Classification Layers
+
+After convolutional feature extraction, the resulting feature maps are flattened and passed to fully connected layers. These layers integrate information from all extracted features and produce a set of output scores, one for each digit class.
+
+The final layer of the network outputs raw class scores, often referred to as logits. These logits are later converted into class probabilities during evaluation using a softmax function. The predicted digit corresponds to the class with the highest score.
+
+### 5.6 Architectural Simplicity and Design Rationale
+
+The chosen architecture is intentionally kept simple. MNIST is a relatively small and clean dataset, and more complex architectures would provide limited performance gains while increasing training time and implementation complexity. A compact CNN is sufficient to achieve high accuracy on this dataset while maintaining interpretability and ease of analysis.
+
+This design choice aligns with the goals of the project, which emphasize clarity, reproducibility, and software engineering best practices over maximizing performance through overly complex models.
+
+### 5.7 Summary of Model Architecture
+
+In summary, the model architecture leverages the core strengths of convolutional neural networks to perform image classification effectively. Through convolutional feature extraction, pooling-based dimensionality reduction, and fully connected classification layers, the network learns hierarchical representations of handwritten digits. The simplicity of the architecture ensures efficient training and clear interpretability, making it well-suited for both educational purposes and systematic analysis.
 ## Data Augmentation
 
 ## Model Architecture
