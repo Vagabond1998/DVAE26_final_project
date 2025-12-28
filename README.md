@@ -8,11 +8,11 @@ This project was developed with the support of generative artificial intelligenc
 
 In this project, generative AI tools (ChatGPT) were used as support tools in the following ways:
 
-Assisting with the generation of code for modular components, including data handling, model architecture, training routines, evaluation metrics, and plotting utilities.
+- Assisting with the generation of code for modular components, including data handling, model architecture, training routines, evaluation metrics, and plotting utilities.
 
-Providing explanations and clarifications of machine learning concepts, software engineering practices, and PyTorch-specific implementation details.
+- Providing explanations and clarifications of machine learning concepts, software engineering practices, and PyTorch-specific implementation details.
 
-Supporting the writing, structuring and drafting of written content, including methodological explanations, design rationales, and report sections.
+- Supporting the writing, structuring and drafting of written content, including methodological explanations, design rationales, and report sections.
 
 The use of generative AI was intended to support learning, understanding, and productivity, not to replace independent reasoning or accountability, in accordance with Karlstad University regulations.
 
@@ -28,6 +28,22 @@ The objective of this project is to develop, train, and evaluate a convolutional
 From an engineering perspective, the project is structured as a complete machine learning pipeline. Raw image data is ingested and transformed into a suitable numerical representation, augmented to improve robustness, and then used to train a CNN model. Model performance is evaluated using standard classification metrics such as accuracy, precision, and recall. The final trained model is packaged and deployed to the Hugging Face platform, allowing external users to download and run inference using the trained network.
 
 By using MNIST as a benchmark dataset, this project provides a controlled environment in which design decisions, training behavior, and evaluation results can be clearly analyzed and explained. The focus is therefore not only on model performance, but also on demonstrating a structured and reproducible approach to machine learning system development, in line with the objectives of the course.
+
+## Outline
+1. Use of Generative Artificial Intelligence (Declaration)
+2. Introduction
+3. Report Outline
+4. Dataset & Data Quality
+5. Repository Structure
+6. Exploratory Data Analysis
+7. Data Transformation & Augmentation
+8. Model Architecture
+9. Training Procedure
+10. Evaluation & Results
+11. Software Engineering Best Practices
+12. Deployment (Hugging Face)
+13. Limitations & Future Work
+14. Conclusion
 
 ## 4. Dataset Description and Data Quality Analysis
 ### 4.1 Dataset Overview
