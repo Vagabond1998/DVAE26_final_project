@@ -317,8 +317,40 @@ By designing the pipeline with deployment in mind, the project demonstrates an e
 
 In summary, the project applies software engineering best practices throughout the machine learning lifecycle. Modular code organization, reproducibility measures, automated testing, logging, explicit path handling, version control, and deployment-oriented design collectively contribute to a robust and maintainable system. These practices ensure that the developed solution is not only accurate but also reliable, transparent, and suitable for real-world use.
 
-## Deployment
+## 9. Deployment on the Hugging Face Platform
+### 9.1 Motivation for Deployment
 
+Deployment is an important step in the machine learning lifecycle, as it enables trained models to be shared, reused, and evaluated outside the local development environment. In the context of this project, deployment serves to demonstrate that the trained convolutional neural network can be packaged and distributed using a modern model-sharing platform.
+
+The Hugging Face Hub was selected as the deployment platform due to its widespread use in the machine learning community and its support for hosting trained models in a reproducible and accessible manner.
+
+### 9.2 Deployment Scope
+
+The scope of deployment in this project focuses on model distribution rather than full application serving. The trained model weights were uploaded to the Hugging Face Hub to allow external users to download and load the model within their own environments.
+
+The deployment does not include a custom inference script or interactive interface. Instead, the uploaded artifacts are intended to be used in conjunction with the provided training code, which defines the model architecture and preprocessing steps. This approach ensures that the deployed model corresponds exactly to the evaluated version reported in this project.
+
+### 9.3 Authentication and Security Considerations
+
+Authentication to the Hugging Face Hub is performed using a personal access token. For security reasons, the access token is not embedded in the notebook or source code. Instead, authentication is handled through the official Hugging Face login mechanism, which securely stores credentials outside the project repository.
+
+This approach follows standard security best practices and prevents accidental exposure of sensitive authentication information.
+
+### 9.4 Uploading the Model to the Hub
+
+The trained model was uploaded programmatically using the Hugging Face Python API directly from the notebook environment. This ensures that the deployed artifact is consistent with the final trained model selected during evaluation.
+
+Only the trained model weights were uploaded, avoiding unnecessary duplication of training data or intermediate artifacts. By separating training and deployment concerns, the repository remains lightweight while still enabling external access to the trained model.
+
+### 9.5 Reproducibility and Reuse
+
+Although the deployment does not include a standalone inference script, reproducibility is ensured through the availability of the full training codebase in the project repository. External users can reproduce inference behavior by loading the deployed weights into the same model architecture and applying identical preprocessing steps as defined in the project code.
+
+This design emphasizes transparency and correctness over convenience and reflects a development-focused deployment strategy appropriate for an academic project.
+
+### 9.6 Summary of Deployment
+
+In summary, the trained convolutional neural network was successfully deployed to the Hugging Face Hub as a reusable model artifact. The deployment demonstrates the ability to package and distribute trained models using a modern platform while maintaining security and reproducibility. While the deployment is minimal and does not include a dedicated inference interface, it fulfills the project requirement of showcasing the trained model on the Hugging Face platform.
 ## How to run the project locally
 
 ## Repository Structure
