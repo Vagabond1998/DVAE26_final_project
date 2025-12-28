@@ -173,9 +173,53 @@ This design choice aligns with the goals of the project, which emphasize clarity
 ### 5.7 Summary of Model Architecture
 
 In summary, the model architecture leverages the core strengths of convolutional neural networks to perform image classification effectively. Through convolutional feature extraction, pooling-based dimensionality reduction, and fully connected classification layers, the network learns hierarchical representations of handwritten digits. The simplicity of the architecture ensures efficient training and clear interpretability, making it well-suited for both educational purposes and systematic analysis.
-## Data Augmentation
 
-## Model Architecture
+## 6. Training Procedure and Hyperparameter Selection
+### 6.1 Training Objective and Loss Function
+
+The objective of the training process is to learn model parameters that minimize classification error on handwritten digit images. This is formulated as a multi-class classification problem with ten output classes corresponding to digits 0 through 9. The network is trained using the cross-entropy loss function, which is standard for multi-class classification tasks and well-suited for optimizing probabilistic predictions produced by neural networks.
+
+Cross-entropy loss measures the discrepancy between the predicted class probabilities and the true class labels. Minimizing this loss encourages the model to assign high probability to the correct digit class for each input image.
+
+### 6.2 Optimization Strategy
+
+Model parameters are optimized using the Adam optimizer. Adam is an adaptive gradient-based optimization algorithm that combines the advantages of momentum-based methods and per-parameter learning rate adaptation. This makes it particularly effective for deep learning models, as it provides stable convergence and reduces the need for extensive manual learning rate tuning.
+
+An initial learning rate of 1×10⁻³ was selected as a reasonable default based on common practice for CNNs trained on MNIST-like datasets. This choice provided a good balance between fast convergence and stable training behavior.
+
+### 6.3 Training Loop and Epoch-Based Learning
+
+Training is performed over multiple epochs, where each epoch corresponds to a full pass over the training dataset. During each epoch, the model processes mini-batches of images, computes the loss, performs backpropagation, and updates model parameters using gradient descent.
+
+Batch-based training improves computational efficiency and allows the optimizer to generalize better by introducing stochasticity into the gradient updates. After each epoch, the model is evaluated on the test dataset to monitor generalization performance and detect potential overfitting.
+
+Training metrics such as training loss, training accuracy, test loss, and test accuracy are recorded at each epoch. These metrics provide insight into the learning dynamics and allow for informed decisions regarding hyperparameter selection.
+
+### 6.4 Hyperparameter Selection Strategy
+
+Hyperparameter selection in this project was performed using informed manual selection rather than an automated or exhaustive search. Given the well-studied nature of the MNIST dataset and the relatively simple convolutional neural network architecture, standard hyperparameter values commonly reported in the literature were adopted as a starting point.
+
+The learning rate was set to 1×10⁻³ when using the Adam optimizer, a value that is widely used for convolutional neural networks and known to provide stable convergence behavior. The batch size was set to 64, balancing computational efficiency with gradient stability. Other parameters, such as optimizer choice and loss function, were selected based on established best practices for multi-class image classification.
+
+This approach allows the project to focus on the correctness and reproducibility of the pipeline while avoiding unnecessary computational overhead.
+
+### 6.5 Empirical Observation During Training
+
+Although multiple hyperparameter configurations were not exhaustively evaluated, training dynamics were closely monitored during model development. Metrics such as training loss, training accuracy, test loss, and test accuracy were recorded at each epoch to assess convergence behavior and generalization performance.
+
+During training, the model exhibited rapid convergence within the first few epochs, followed by a gradual plateau in test accuracy. This behavior suggests that the chosen learning rate was sufficiently large to enable fast learning while remaining stable throughout training. No signs of training instability, such as exploding loss or erratic accuracy fluctuations, were observed.
+
+The number of training epochs was selected based on these observations. Training beyond approximately 10 epochs yielded diminishing improvements in test performance, indicating that additional training provided limited benefit.
+
+### 6.6 Overfitting Considerations
+
+Overfitting was assessed by comparing training and test metrics across epochs. While training accuracy continued to increase slightly with additional epochs, test accuracy remained stable and did not degrade. Similarly, test loss did not exhibit a sustained upward trend.
+
+This indicates that the model did not suffer from severe overfitting, likely due to the use of data augmentation, normalization, and a relatively compact model architecture. Based on these observations, the final model checkpoint was selected using the highest achieved test accuracy rather than the final training epoch.
+
+6.7 Summary of Training and Hyperparameter Selection
+
+In summary, hyperparameters were selected using standard values informed by prior knowledge and validated through empirical observation of training behavior. Monitoring of loss and accuracy curves ensured that the model converged stably and generalized well to unseen data. This approach provides a transparent and reproducible training procedure while remaining appropriate for the scope and objectives of the project.
 
 ## Training Procedure
 
