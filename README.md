@@ -93,6 +93,41 @@ Exploratory Data Analysis confirmed that the MNIST dataset is correctly structur
 
 The insights gained from EDA directly inform the preprocessing and modeling decisions described in subsequent sections.
 
+## 4. Data Transformation and Augmentation
+### 4.1 Role of Data Transformation in Image Recognition
+
+Before images can be used as input to a convolutional neural network, they must be transformed into a numerical format suitable for gradient-based optimization. In this project, data transformation serves two primary purposes: converting raw image data into tensors that can be processed by the model, and normalizing input values to ensure stable and efficient training.
+
+Raw MNIST images are stored as grayscale intensity values. These images are first converted into tensors and reshaped to include an explicit channel dimension. This transformation results in tensors of shape (1, 28, 28), which is the expected input format for the convolutional layers used in the model architecture.
+
+### 4.2 Normalization for Numerical Stability
+
+Normalization is a crucial preprocessing step in neural network training. Without normalization, input values can vary across a wide numerical range, which may lead to unstable gradients and slow convergence during training. To address this, pixel values are normalized using the mean and standard deviation computed from the MNIST training set.
+
+By centering and scaling the input distribution, normalization improves numerical stability and allows the optimizer to operate more effectively. Importantly, normalization parameters are computed using only the training data and then applied consistently to both training and test datasets. This prevents information leakage from the test set into the training process and ensures a fair evaluation of model performance.
+
+### 4.3 Data Augmentation Strategy
+
+Data augmentation is employed to enhance the diversity of the training dataset and improve the model’s ability to generalize to unseen samples. Although MNIST is a clean and curated dataset, handwritten digits exhibit natural variations in orientation and writing style. Without augmentation, a model may overfit to the specific orientations and patterns present in the training set.
+
+In this project, data augmentation is implemented using random rotations applied to training images. Small rotations simulate realistic variations in handwriting, such as slightly tilted digits, without altering the semantic meaning of the image. This encourages the model to learn rotation-invariant features rather than memorizing specific pixel configurations.
+
+### 4.4 Separation of Training and Test Transformations
+
+A key design decision in the preprocessing pipeline is the strict separation of transformations applied to the training and test datasets. Data augmentation is applied exclusively to the training data, while the test data undergoes only deterministic transformations such as tensor conversion and normalization.
+
+This separation ensures that evaluation metrics reflect the model’s performance on unmodified data and prevents artificial inflation of test accuracy. Applying augmentation to the test set would introduce randomness into the evaluation process and compromise the reliability of the reported results.
+
+4.5 Implementation Considerations
+
+The transformation and augmentation logic is implemented in a modular and reusable manner. Separate transformation pipelines are defined for training and testing, allowing preprocessing behavior to be adjusted independently without modifying the rest of the training code. This modular design improves code clarity, simplifies experimentation, and supports reproducibility.
+
+By encapsulating transformations within dedicated functions, the preprocessing pipeline remains transparent and easy to audit, which is particularly important in an academic and engineering-focused context.
+
+4.6 Summary of Data Preparation Approach
+
+In summary, data transformation and augmentation play a central role in preparing the MNIST dataset for convolutional neural network training. Through tensor conversion, normalization, and carefully chosen augmentation techniques, the input data is made numerically stable and more representative of real-world handwriting variability. These preprocessing steps directly support the model’s ability to learn robust and generalizable representations from image data.
+
 ## Data Quality Analysis
 
 ## Data Augmentation
